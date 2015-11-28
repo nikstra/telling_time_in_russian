@@ -1,0 +1,285 @@
+/* COLORS
+************************************************************/
+/*
+  LightSlateGray: #789
+*/
+
+/* GENERAL STYLE
+************************************************************/
+
+html, body, #page-container { height: 100%; margin: 0; padding: 0; }
+body > #page-container { height: auto; min-height: 100%; }
+#page-content { margin: 0; padding: 1px 0 4em; } /* Padding at the top to keep h1 from overflowing due to collapsing margins and at the bottom to give room for the footer */
+
+body {
+  font-family: "Geneva CY", "Helvetica CY", "Arial", sans-serif;
+  min-width: 480px;
+  overflow-y: scroll;
+  text-align: center;
+}
+
+.speak { cursor: default; }
+.really-small { font-size: 0.5em; }
+
+
+/* HEADINGS
+************************************************************/
+
+h1 { font-size: 2em; font-weight: bold; }
+
+#left-column h2,
+#right-column h2 {
+  display: inline;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+
+/* COLUMNS LAYOUT
+************************************************************/
+
+/* COLUMNS */
+#left-container {
+  width: 50%;
+  float: left;
+  margin-right: -160px; /* minus half of the center container width */
+  margin-left: auto;
+
+  /* not important for the columns */
+  text-align: right;
+}
+
+#left-column {
+  margin-right: 160px; /* half of the center container width */
+
+  /* not important for the columns */
+}
+
+#center-column {
+  width: 320px; /* size of the fixed width */
+  float: left;
+
+  /* not important for the columns */
+  text-align: center;
+}
+
+#right-container {
+  width: 50%;
+  float: right;
+  margin-left: -160px; /* minus half of the center container width */
+
+  /* not important for the columns */
+}
+
+#right-column {
+  margin-left: 160px; /* half of the center container width */
+
+  /* not important for the columns */
+  text-align: left;
+}
+/* COLUMNS END */
+
+
+/* CLOCK DISPLAY
+************************************************************/
+
+#time-container { clear: both; text-align: center; }
+#time-text { display: inline-block; font-size: 1.2em; line-height: 0.8; }
+#canvas {
+  background-color: LightSlateGray;
+  border-radius: 14px;
+}
+
+
+/* CLOCK BUTTONS
+************************************************************/
+
+.btn-up-down {
+  background-color: transparent;
+  border: none;
+  color: darkblue;
+  padding: 0;
+  text-decoration: none;
+}
+
+.btn-up-down:hover { color: grey; }
+.btn-up-down:active { color: red; }
+.btn-up-down:disabled { color: grey; cursor: auto; }
+
+.unselectable {
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -ms-user-select: none; /* IE10+ */
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  cursor: default;
+/*  user-select: none; */ /* breaks CSS level 3 validation */
+}
+
+#sel-hour:disabled { color: black; }
+#sel-minute:disabled { color: black; }
+
+/* TEST MED NY KNAPP-STIL */
+
+.clock-btn {
+  box-shadow: 2px 3px 0px 0px #899599;
+/*  background: -ms-linear-gradient( top, #EDEDED 5%, #BAB1BA 100% ); */
+  background: linear-gradient( to bottom, #EDEDED 5%, #BAB1BA 100% );
+  background-color: #EDEDED;
+  border-radius: 14px;
+  border: 1px solid #B9B9D4; /* #D6BCD6; */
+  display: inline-block;
+  color: darkblue; /* #3A8A9E; */
+  font-size: 8px;
+  text-align: center;
+  padding: 3px 7px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #E1E2ED;
+
+  margin: 3px;
+  width: 26px;
+}
+
+.clock-btn:active:enabled {
+  box-shadow: 1px 2px 0px 0px #899599;
+  position: relative;
+  top: 1px;
+}
+
+.clock-btn:disabled {
+  color: grey;
+  cursor: auto;
+}
+
+.help-lnk {
+  display: inline-block;
+  margin: 2px;
+  padding: 3px 7px;
+}
+
+.help-lnk a {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* SLUT TEST MED NY KNAPP-STIL */
+
+#quick-select span,
+#clock-control span {
+  display: inline-block;
+  font-size: 12px;
+  vertical-align: middle;
+  white-space: normal;
+  width: 65%;
+}
+
+#quick-select div,
+#clock-control div {
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+}
+
+
+/* HELP OVERLAY
+************************************************************/
+
+#help-screen {
+  display: none;
+}
+
+#help-screen-overlay {
+  background: rgba( 0, 0, 0, 0.7 );
+  display: block;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.close-help-lnk {
+  background: rgb( 245, 245, 245 );
+  color: black;
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+  height: 30px;
+  position: absolute;
+  right: 2px;
+  text-align: center;
+  text-decoration: none;
+  top: 3px;
+  width: 35px;
+}
+
+#help-text {
+  background-color: #FFF;
+  border: 5px solid #CCC;
+  border-radius: 10px;
+  bottom: 50px;
+  left: 10%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8px;
+  position: absolute;
+  right: 10%;
+  text-align: left;
+  top: 50px;
+  width: 80%;
+  z-index: 11;
+}
+
+#help-text div.content {
+  bottom: 10px;
+  left: 10px;
+  padding: 10px;
+  overflow: auto;
+  position: absolute;
+  right: 10px;
+  top: 35px;
+}
+
+#help-text table tr td {
+  border: 1px solid #CCC;
+}
+
+#help-text td:first-child {
+  font-size: 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+#help-text .small {
+  font-size: 8px;
+}
+
+
+/* FOOTER
+************************************************************/
+
+/* http://www.lwis.net/journal/2008/02/08/pure-css-sticky-footer/ */
+/* http://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height */
+#footer {
+  clear: both;
+  height: 4em;
+  margin-top: -4em;
+  position: relative;
+  z-index: 1;
+}
+
+#footer .bottom {
+  bottom: 0;
+  display: inline-block;
+  position: absolute;
+  vertical-align: bottom;
+  width: 50%;
+}
+
+#footer .bottom.right { right: 0; text-align: right; }
+#footer .bottom.left { left: 0; text-align: left; }
+
