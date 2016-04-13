@@ -2,7 +2,7 @@
 
   "use strict";
 
-  function unsupportedBrowser() {
+  var unsupportedBrowser = function() {
 
     var fragment,
         h1;
@@ -23,11 +23,13 @@
 
     document.body.appendChild( fragment );
     return false;
-  }
+  };
+
 
   /* Test if DOM Level 2 is supported to exclude old browsers */
   if( typeof window.addEventListener == 'undefined' )
     return window.onload = unsupportedBrowser;
+
 
   /* Global object to keep track of what the clock is displaying. */
   var canvasClock = function() {
@@ -39,14 +41,14 @@
         _canvas,
         _ctx,
         _radius,
-        _frUpdate;
+        _frUpdate,
 
-    function _incrHour( h )   { return ((( h + 1 ) % 24 ) + 24 ) % 24; }
-    function _decrHour( h )   { return ((( h - 1 ) % 24 ) + 24 ) % 24; }
-    function _incrMinute( m ) { return ((( m + 1 ) % 60 ) + 60 ) % 60; }
-    function _decrMinute( m ) { return ((( m - 1 ) % 60 ) + 60 ) % 60; }
+    _incrHour   = function( h ) { return ((( h + 1 ) % 24 ) + 24 ) % 24; },
+    _decrHour   = function( h ) { return ((( h - 1 ) % 24 ) + 24 ) % 24; },
+    _incrMinute = function( m ) { return ((( m + 1 ) % 60 ) + 60 ) % 60; },
+    _decrMinute = function( m ) { return ((( m - 1 ) % 60 ) + 60 ) % 60; },
 
-    function _setClock( hour, minute ) {
+    _setClock = function( hour, minute ) {
 
       var second = 0;
 
@@ -73,24 +75,27 @@
       minute = ( minute * Math.PI / 30 ) +
                ( second * Math.PI / ( 30 * 60 ));
       _drawHand( minute, _radius * 0.8, _radius * 0.07 );
-    }
+    },
 
-    function _startClock() {
+
+    _startClock = function() {
 
       _drawClock(); /* Update select buttons and timeText */
       _clockIsRunning = true;
       _intervalID = setInterval( _drawClock, 1000 );
-    }
+    },
 
-    function _stopClock() {
+
+    _stopClock = function() {
 
       if( ! _clockIsRunning ) return false;
       _clockIsRunning = false;
       clearInterval( _intervalID );
       _drawClock(); /* To hide the second hand. */
-    }
+    },
 
-    function _stepClock( forward ) {
+
+    _stepClock = function( forward ) {
 
       if( forward ) {
         _minute = _incrMinute( _minute );
@@ -101,30 +106,36 @@
         if( _minute === 59 ) _hour = _decrHour( _hour );
         _setClock( _hour, _minute );
       }
-    }
+    },
 
-    function _setCurrentTimeClock() {
+
+    _setCurrentTime = function() {
 
       _drawClock();
-    }
+    },
 
-    function _clockStepHour( forward ) {
+
+    _stepHour = function( forward ) {
+
       if( forward ) {
         _setClock( _incrHour( _hour ), null );
       } else {
         _setClock( _decrHour( _hour ), null );
       }
-    }
+    },
 
-    function _clockStepMinute( forward ) {
+
+    _stepMinute = function( forward ) {
+
       if( forward ) {
         _setClock( null, _incrMinute( _minute ));
       } else {
         _setClock( null, _decrMinute( _minute ));
       }
-    }
+    },
 
-    function _drawFace() {
+
+    _drawFace = function() {
 
       var grad;
 
@@ -146,9 +157,10 @@
       _ctx.arc( 0, 0, _radius * 0.1, 0, 2 * Math.PI );
       _ctx.fillStyle = '#333';
       _ctx.fill();
-    }
+    },
 
-    function _drawNumbers() {
+
+    _drawNumbers = function() {
 
       var ang,
           num;
@@ -168,9 +180,10 @@
         _ctx.translate( 0, _radius * 0.85 );
         _ctx.rotate( -ang );
       }
-    }
+    },
 
-    function _drawHand( pos, length, width ) {
+
+    _drawHand = function( pos, length, width ) {
 
       _ctx.beginPath();
       _ctx.lineWidth = width;
@@ -180,9 +193,10 @@
       _ctx.lineTo( 0, -length );
       _ctx.stroke();
       _ctx.rotate( -pos );
-    }
+    },
 
-    function _drawTime() {
+
+    _drawTime = function() {
 
       var now = new Date(),
           hour = now.getHours(),
@@ -214,16 +228,18 @@
         second = ( second * Math.PI / 30 );
         _drawHand( second, _radius * 0.9, _radius * 0.02 );
       }
-    }
+    },
 
-    function _drawClock() {
+
+    _drawClock = function() {
 
       _drawFace();
       _drawNumbers();
       _drawTime();
-    }
+    },
 
-    function _init( fr ) {
+
+    _init = function( fr ) {
 
       _frUpdate = fr; /* fuction reference */
       _canvas = document.getElementById( "canvas" );
@@ -232,7 +248,8 @@
       _ctx.translate( _radius, _radius );
       _radius = _radius * 0.90;
       _drawClock();
-    }
+    };
+
 
     return {
       init:        _init,
@@ -240,20 +257,22 @@
       start:       _startClock,
       stop:        _stopClock,
       step:        _stepClock,
-      currentTime: _setCurrentTimeClock,
-      stepHour:    _clockStepHour,
-      stepMinute:  _clockStepMinute
+      currentTime: _setCurrentTime,
+      stepHour:    _stepHour,
+      stepMinute:  _stepMinute
     };
+
   }();
+
 
   /* Cardinal numbers in nominative case and feminine form (1, 2) */
   var CARDINAL_NUM_NOM_FEM = [
     "одна",
     "две"
-  ];
+  ],
 
   /* Cardinal numbers in nominative case masculine form (1-19) */
-  var CARDINAL_NUM_NOM = [
+  CARDINAL_NUM_NOM = [
     "ноль",
     "один",
     "два",
@@ -274,19 +293,19 @@
     "семнадцать",
     "восемнадцать",
     "девятнадцать"
-  ];
+  ],
 
   /* Cardinal numbers in nominative case masculine form (20, 30, 40, 50) */
-  var CARDINAL_NUM_TENS_NOM = [
+  CARDINAL_NUM_TENS_NOM = [
     "десять",
     "двадцать",
     "тридцать",
     "сорок",
     "пятьдесят"
-  ];
+  ],
 
   /* Cardinal numbers in genitive case masculine form (1-29) */
-  var CARDINAL_NUM_GEN = [
+  CARDINAL_NUM_GEN = [
     "одной",
     "двух",
     "трёх",
@@ -316,10 +335,10 @@
     "двадцати семи",
     "двадцати восьми",
     "двадцати девяти"
-  ];
+  ],
 
   /* Ordinal numbers in genitive case masculine form (1st-12th) */
-  var ORDINAL_NUM_GEN = [
+  ORDINAL_NUM_GEN = [
     "первого",       /* 1st */
     "второго",       /* 2nd */
     "третьего",      /* 3rd */
@@ -332,7 +351,8 @@
     "десятого",      /* 10th */
     "одиннадцатого", /* 11th */
     "двенадцатого"   /* 12th */
-  ];
+  ],
+
 
   /*
   If you use % operator to calculate 'a mod c' and you get a negative result, you will
@@ -340,26 +360,27 @@
   to the result in every function below. Since it is always added another 'mod c'
   operation is applied to deal with positive numbers.
   */
-  function convert24to12h( h )     { return (( h % 12 ) + 11 ) % 12 + 1; }
-  function addHour12h( h, n )      { n = n || 1; return ((( h + n ) % 12 ) + 11 ) % 12 + 1; }
-  function subtractHour12h( h, n ) { n = n || 1; return ((( h - n ) % 12 ) + 11 ) % 12 + 1; }
-  function addHour( h, n )         { n = n || 1; return ((( h + n ) % 24 ) + 24 ) % 24; }
-  function subtractHour( h, n )    { n = n || 1; return ((( h - n ) % 24 ) + 24 ) % 24; }
-  function addMinute( m, n )       { n = n || 1; return ((( m + n ) % 60 ) + 60 ) % 60; }
-  function subtractMinute( m, n )  { n = n || 1; return ((( m - n ) % 60 ) + 60 ) % 60; }
+  convert24to12h  = function( h )    { return (( h % 12 ) + 11 ) % 12 + 1; },
+  addHour12h      = function( h, n ) { n = n || 1; return ((( h + n ) % 12 ) + 11 ) % 12 + 1; },
+  subtractHour12h = function( h, n ) { n = n || 1; return ((( h - n ) % 12 ) + 11 ) % 12 + 1; },
+  addHour         = function( h, n ) { n = n || 1; return ((( h + n ) % 24 ) + 24 ) % 24; },
+  subtractHour    = function( h, n ) { n = n || 1; return ((( h - n ) % 24 ) + 24 ) % 24; },
+  addMinute       = function( m, n ) { n = n || 1; return ((( m + n ) % 60 ) + 60 ) % 60; },
+  subtractMinute  = function( m, n ) { n = n || 1; return ((( m - n ) % 60 ) + 60 ) % 60; },
+
 
   /* Returns a parenthesized string */
-  function ps( str ) { return '(' + str + ')'; }
+  ps = function( str ) { return '(' + str + ')'; },
 
 
   /* Tests if num is between 11 and 19 (ending in -надцать) */
-  function isTeen( num ) {
+  isTeen = function( num ) {
 
     return ( num === 10 ) ? false : ( Math.floor( num / 10 ) === 1 );
-  }
+  },
 
 
-  function grammaticalCaseHourStr( num ) {
+  grammaticalCaseHourStr = function( num ) {
 
     switch( num % 10 ) {
     case 1:
@@ -371,10 +392,10 @@
     default:
       return "часов"; /* genitive plural */
     }
-  }
+  },
 
 
-  function grammaticalCaseMinuteStr( num ) {
+  grammaticalCaseMinuteStr = function( num ) {
 
     switch( num % 10 ) {
     case 1:
@@ -386,10 +407,10 @@
     default:
       return "минут"; /* genitive plural */
     }
-  }
+  },
 
 
-  function timeOfDayStr( hour ) {
+  timeOfDayStr = function( hour ) {
 
     return (
       ( hour >=  0 && hour <=  4 ) ? "ночи"   : /* (of the night) for midnight – 5 am */
@@ -398,10 +419,10 @@
       ( hour >= 17 && hour <= 23 ) ? "вечера" : /* (of the evening) for 5 pm – midnight */
                                      ""         /* empty string for hours not in range 0-23 */
     );
-  }
+  },
 
 
-  function cardinalNumNom( num, gender ) {
+  cardinalNumNom = function( num, gender ) {
 
     if( typeof gender === 'undefined') gender = 'm';
 
@@ -424,21 +445,21 @@
 
     return CARDINAL_NUM_TENS_NOM[tens - 1] +
             ' ' + CARDINAL_NUM_NOM[ones];
-  }
+  },
 
 
-  function cardinalNumGen( num ) {
+  cardinalNumGen = function( num ) {
 
     return CARDINAL_NUM_GEN[num - 1];
-  }
+  },
 
-  function ordinalNumGen( num ) {
+  ordinalNumGen = function( num ) {
 
     return ORDINAL_NUM_GEN[num - 1];
-  }
+  },
 
 
-  function oClockStr( hour, minute ) {
+  oClockStr = function( hour, minute ) {
 
     var hour12h = convert24to12h( hour ),
         strTod = ' ' + ps( timeOfDayStr( hour )),
@@ -505,10 +526,10 @@
     }
 
     return strTimeArr;
-  }
+  },
 
 
-  function firstHalfHourStr( hour, minute ) {
+  firstHalfHourStr = function( hour, minute ) {
 
     var hour12h = convert24to12h( hour ),
         nextHour12h = addHour12h( hour12h ),
@@ -523,10 +544,10 @@
       cardinalNumNom( hour === 0 ? 12 : hour ) +
           strZero + cardinalNumNom( minute, 'f' )]
     );
-  }
+  },
 
 
-  function halfPastStr( hour, minute ) {
+  halfPastStr = function( hour, minute ) {
 
     var hour12h = convert24to12h( hour ),
         strNextHour12h = ordinalNumGen( addHour12h( hour12h )),
@@ -541,10 +562,10 @@
       cardinalNumNom( hour12h ) + ' ' + cardinalNumNom( minute, 'f' ),
       cardinalNumNom( hour === 0 ? 12 : hour ) + ' ' + cardinalNumNom( minute, 'f' )
     ];
-  }
+  },
 
 
-  function secondHalfHourStr( hour, minute ) {
+  secondHalfHourStr = function( hour, minute ) {
 
     /* без + genitive */
 
@@ -567,10 +588,10 @@
         [cardinalNumNom( hour === 0 ? 12 : hour ) +
             ' ' + cardinalNumNom( minute, 'f' )]
     );
-  }
+  },
 
 
-  function timeToText( hour, minute ) {
+  timeToText = function( hour, minute ) {
 
     var additionalFormatsArr = [];
 
@@ -593,24 +614,24 @@
       cardinalNumNom( minute, 'f' ) + ' ' +
       grammaticalCaseMinuteStr( minute )
     ] );
-  }
+  },
 
 
-  function updateTimeHtml( hour, minute ) {
+  updateTimeHtml = function( hour, minute ) {
 
     updateTimeSel( hour, minute );
     updateTimeTextDiv( hour, minute );
-  }
+  },
 
 
-  function updateTimeSel( hour, minute ) {
+  updateTimeSel = function( hour, minute ) {
 
     document.getElementById( 'sel-hour' ).value = hour;
     document.getElementById( 'sel-minute' ).value = minute;
-  }
+  },
 
 
-  function updateTimeTextDiv( hour, minute ) {
+  updateTimeTextDiv = function( hour, minute ) {
 
     var timeText = document.getElementById( "time-text" ),
         fragment,
@@ -646,10 +667,10 @@
     }
 
     timeText.appendChild( fragment );
-  }
+  },
 
 
-  function disableClockButtons() {
+  disableClockButtons = function() {
 
     var elements,
         i,
@@ -674,10 +695,10 @@
         "clock-control" ).getElementsByTagName( "button" );
     for( i = 0, j = elements.length; i < j; i++ )
         if( elements[i].id != "btn-stop" ) elements[i].disabled = true;
-  }
+  },
 
 
-  function enableClockButtons() {
+  enableClockButtons = function() {
 
     var elements,
         i,
@@ -702,10 +723,10 @@
         "clock-control" ).getElementsByTagName( "button" );
     for( i = 0, j = elements.length; i < j; i++ )
         elements[i].disabled = false;
-  }
+  },
 
 
-  function dumpStrings( e ) {
+  dumpStrings = function( e ) {
 
     var a,
         b,
@@ -728,13 +749,14 @@
     }
     e.preventDefault();
     return false;
-  }
+  },
+
 
   /*
   Event handlers
   */
 
-  function onInpTimeSelChange( e ) {
+  onInpTimeSelChange = function( e ) {
 
     if( e.target === e.currentTarget ) return;
 
@@ -744,10 +766,10 @@
     canvasClock.set(
       parseInt( sh.options[sh.selectedIndex].value ),
       parseInt( sm.options[sm.selectedIndex].value ));
-  }
+  },
 
 
-  function onUpDownClick( e ) {
+  onUpDownClick = function( e ) {
 
     if( e.target === e.currentTarget ) return;
 
@@ -765,9 +787,10 @@
       canvasClock.stepMinute( true );
       break;
     }
-  }
+  },
 
-  function onQuickSetClick( e ) {
+
+  onQuickSetClick = function( e ) {
 
     if( e.target === e.currentTarget ) return;
 
@@ -798,10 +821,10 @@
       break;
     }
     return false;
-  }
+  },
 
 
-  function onControlClick( e ) {
+  onControlClick = function( e ) {
 
     if( e.target === e.currentTarget ) return;
 
@@ -825,7 +848,7 @@
       break;
     }
     return false;
-  }
+  };
 
 
   window.addEventListener( 'load', function() {
@@ -833,7 +856,7 @@
       var tc,
           ts;
 
-      /* Detect HTML5 support */
+      /* Detect HTML5 canvas support */
       tc = document.createElement( "canvas" );
       if( typeof tc.getContext == 'undefined' )
         return unsupportedBrowser();
