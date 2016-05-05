@@ -1,96 +1,119 @@
-/* COLORS
-************************************************************/
-/*
-  LightSlateGray: #789
-*/
 
-/* GENERAL STYLE
+/* BASIC PAGE LAYOUT
 ************************************************************/
 
-html, body, #page-container { height: 100%; margin: 0; padding: 0; }
-body > #page-container { height: auto; min-height: 100%; }
-#page-content { margin: 0; padding: 1px 0 4em; } /* Padding at the top to keep h1 from overflowing due to collapsing margins and at the bottom to give room for the footer */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
 
 body {
   font-family: "Geneva CY", "Helvetica CY", "Arial", sans-serif;
-  min-width: 480px;
-  overflow-y: scroll;
+}
+
+div#page-content {
+	padding-bottom: 100px; /* Match height of the #footer element */
+}
+
+canvas#canvas {
+  background-color: rgb(119, 136, 153); /* LightSlateGray */
+  border-left: 1px solid #CCCCCC;
+  border-radius: 4px;
+  border-top: 1px solid #CCCCCC;
+  box-shadow: 1px 2px 0px 0px #777777;
+  height: 300px;
+  width: 300px;
+}
+
+div#page-wrapper {
+	min-height: 100%;
+  min-width: 320px;
+	position: relative;
+}
+
+div#menubar {
+  display: none;
+}
+
+div#page-header {
   text-align: center;
 }
 
-.speak { cursor: default; }
-.really-small { font-size: 0.5em; }
+div#clock-container {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
+div#center,
+div#left-panel,
+div#right-panel {
+  display: inline-block;
+  vertical-align: top;
+}
 
-/* HEADINGS
-************************************************************/
+div#left-panel,
+div#right-panel {
+  width: 160px;
+}
 
-h1 { font-size: 2em; font-weight: bold; }
+div#center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 320px;
+}
 
-#left-column h2,
-#right-column h2 {
+div#left-panel {
+  text-align: right;
+}
+
+div#right-panel {
+  text-align: left;
+}
+
+div#time-text {
+  text-align: center;
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  padding: 20px;
+}
+
+#left-panel .menu-header,
+#right-panel .menu-header {
   display: inline;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   margin: 0;
 }
 
-
-/* COLUMNS LAYOUT
-************************************************************/
-
-/* COLUMNS */
-#left-container {
-  width: 50%;
-  float: left;
-  margin-right: -160px; /* minus half of the center container width */
-  margin-left: auto;
-
-  /* not important for the columns */
-  text-align: right;
+#sel-button-container,
+#up-down-container {
+  margin: 10px;
 }
 
-#left-column {
-  margin-right: 160px; /* half of the center container width */
-
-  /* not important for the columns */
+#sel-button-container .sel-button-group,
+#up-down-container .up-down-group {
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 5px;
+  width: 120px;
 }
 
-#center-column {
-  width: 320px; /* size of the fixed width */
-  float: left;
-
-  /* not important for the columns */
-  text-align: center;
+/* OUTPUT DIV */
+#time-text {
+  font-size: 1.2em;
+  padding: 20px;
 }
-
-#right-container {
-  width: 50%;
-  float: right;
-  margin-left: -160px; /* minus half of the center container width */
-
-  /* not important for the columns */
-}
-
-#right-column {
-  margin-left: 160px; /* half of the center container width */
-
-  /* not important for the columns */
-  text-align: left;
-}
-/* COLUMNS END */
-
-
-/* CLOCK DISPLAY
-************************************************************/
-
-#time-container { clear: both; text-align: center; }
-#time-text { display: inline-block; font-size: 1.2em; line-height: 0.8; }
-#canvas {
-  background-color: LightSlateGray;
-  border-radius: 14px;
-}
-
 
 /* CLOCK BUTTONS
 ************************************************************/
@@ -103,45 +126,40 @@ h1 { font-size: 2em; font-weight: bold; }
   text-decoration: none;
 }
 
-.btn-up-down:hover { color: grey; }
-.btn-up-down:active { color: red; }
-.btn-up-down:disabled { color: grey; cursor: auto; }
-
-.unselectable {
-  -khtml-user-select: none; /* webkit (konqueror) browsers */
-  -moz-user-select: none; /* mozilla browsers */
-  -ms-user-select: none; /* IE10+ */
-  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
-  cursor: default;
-/*  user-select: none; */ /* breaks CSS level 3 validation */
+.btn-up-down:hover {
+  color: grey;
 }
 
-#sel-hour:disabled { color: black; }
-#sel-minute:disabled { color: black; }
+.btn-up-down:active {
+  color: red;
+}
 
-/* TEST MED NY KNAPP-STIL */
+.btn-up-down:disabled {
+  color: grey;
+  cursor: auto;
+}
+
+#sel-minute:disabled,
+#sel-hour:disabled {
+  color: black;
+}
 
 .clock-btn {
-  box-shadow: 2px 3px 0px 0px #899599;
-/*  background: -ms-linear-gradient( top, #EDEDED 5%, #BAB1BA 100% ); */
-  background: linear-gradient( to bottom, #EDEDED 5%, #BAB1BA 100% );
-  background-color: #EDEDED;
-  border-radius: 14px;
-  border: 1px solid #B9B9D4; /* #D6BCD6; */
-  display: inline-block;
+  background: #AAAAAA;
+  border: 0 none;
+  border-left: 1px solid #CCCCCC;
+  border-radius: 4px;
+  border-top: 1px solid #CCCCCC;
+  box-shadow: 1px 2px 0px 0px #777777;
   color: darkblue; /* #3A8A9E; */
-  font-size: 8px;
+  height: 30px;
+  margin: 2px;
   text-align: center;
-  padding: 3px 7px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #E1E2ED;
-
-  margin: 3px;
-  width: 26px;
+  width: 30px;
 }
 
 .clock-btn:active:enabled {
-  box-shadow: 1px 2px 0px 0px #899599;
+  box-shadow: 0px 1px 0px 0px #777777;
   position: relative;
   top: 1px;
 }
@@ -158,48 +176,102 @@ h1 { font-size: 2em; font-weight: bold; }
 }
 
 .help-lnk a {
+  color: darkblue; /* #3A8A9E; */
   font-size: 1.5em;
   font-weight: bold;
   text-decoration: none;
 }
 
-/* SLUT TEST MED NY KNAPP-STIL */
-
-#quick-select span,
-#clock-control span {
-  display: inline-block;
-  font-size: 12px;
-  vertical-align: middle;
-  white-space: normal;
-  width: 65%;
-}
-
-#quick-select div,
-#clock-control div {
-  vertical-align: middle;
-  white-space: nowrap;
-  width: auto;
-}
-
-
-/* HELP OVERLAY
+/* SLIDE OUT MENU
 ************************************************************/
 
-#help-screen {
+/* Hide the checkbox */
+#clock-control-toggle,
+#quick-select-toggle {
   display: none;
 }
 
-#help-screen-overlay {
-  background: rgba( 0, 0, 0, 0.7 );
-  display: block;
-  height: 100%;
+/* Hide menu/close symbols */
+.equiv,
+.times {
+  cursor: default;
+  display: none;
+  font-family: monospace;
+  font-size: 40px; /*1.5em;*/
+  line-height: 40px;
+}
+
+/* FOOTER
+************************************************************/
+
+div#footer {
+  bottom: 0;
+  height: 100px; /* Match with padding-bottom of #page-content. */
   left: 0;
-  margin: 0;
-  padding: 0;
-  position: fixed;
-  top: 0;
+  position: absolute;
   width: 100%;
-  z-index: 10;
+}
+
+#footer .bottom {
+  bottom: 0;
+  display: inline-block;
+  position: absolute;
+  vertical-align: bottom;
+  width: 50%;
+}
+
+div#footer .bottom.left {
+  left: 0;
+  text-align: left;
+}
+
+div#footer .bottom.right {
+  right: 0;
+  text-align: right;
+}
+
+/* GENERAL RULES
+************************************************************/
+
+.speak {
+  cursor: default;
+}
+
+.speak:active {
+  background: #CCCCCC;
+}
+
+.really-small {
+  font-size: 0.5em;
+}
+
+.unselectable {
+  cursor: default;
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+   -khtml-user-select: none; /* webkit (konqueror) browsers */
+     -moz-user-select: none; /* mozilla browsers */
+      -ms-user-select: none; /* IE10+ */
+       /* user-select: none; */ /* breaks CSS level 3 validation */
+}
+
+/* HELP SCREEN AND OVERLAY
+************************************************************/
+
+/* bottom, top and height are set larger than the display size
+ * so that page contents doesn't show through if browser has
+ * auto-hiding address bar (ie. Chrome on Android).
+ */
+div#help-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  bottom: -100px;
+  height: 150%;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: -100px;
+  width: 100%;
+  z-index: 5;
 }
 
 .close-help-lnk {
@@ -218,23 +290,23 @@ h1 { font-size: 2em; font-weight: bold; }
 }
 
 #help-text {
-  background-color: #FFF;
+  background: #FFFFFF;
   border: 5px solid #CCC;
   border-radius: 10px;
-  bottom: 50px;
+  display: none;
+  bottom: 10%;
   left: 10%;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 5px auto;
   padding: 8px;
-  position: absolute;
+  position: fixed;
   right: 10%;
   text-align: left;
-  top: 50px;
-  width: 80%;
-  z-index: 11;
+  top: 10%;
+  z-index: 10;
 }
 
-#help-text div.content {
+#help-text div.help-content {
   bottom: 10px;
   left: 10px;
   padding: 10px;
@@ -244,7 +316,26 @@ h1 { font-size: 2em; font-weight: bold; }
   top: 35px;
 }
 
-#help-text table tr td {
+.help-content h2,
+.help-content h3 {
+  margin: 5px;
+  margin-top: 10px;
+}
+
+.help-content p,
+.help-content span,
+.help-content table,
+.help-content td {
+  margin: 5px;
+}
+
+.help-content td {
+  padding: 3px;
+}
+
+#help-text table,
+#help-text tr,
+#help-text td {
   border: 1px solid #CCC;
 }
 
@@ -259,27 +350,195 @@ h1 { font-size: 2em; font-weight: bold; }
 }
 
 
-/* FOOTER
+/* RULES FOR SMALL SCREENS
 ************************************************************/
 
-/* http://www.lwis.net/journal/2008/02/08/pure-css-sticky-footer/ */
-/* http://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height */
-#footer {
-  clear: both;
-  height: 4em;
-  margin-top: -4em;
-  position: relative;
-  z-index: 1;
+/* Set max-width a bit wider than 640px so that the layout
+ * does not break if there is a scrollbar visible.
+ */
+@media screen and (max-width: 660px) {
+
+  h1 {
+    font-size: 1.2em;
+  }
+
+  canvas#canvas {
+    height: 150px;
+    width: 150px;
+  }
+
+  div#menubar {
+    background: #000000;
+    display: block;
+    height: 30px;
+  }
+
+  div#left-panel,
+  div#right-panel {
+    position: fixed;
+    top: 0;
+  }
+
+  div#left-panel {
+    left: 0;
+  }
+
+  div#right-panel {
+    right: 0;
+  }
+
+  div#help-contents {
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+    top: 5%;
+  }
+
+  #up-down-container .up-down-group {
+    padding: 5px;
+    vertical-align: middle;
+  }
+
+  .btn-up-down {
+    font-size: 25px;
+    height: 30px;
+  }
+
+  #sel-hour,
+  #sel-minute {
+    height: 30px;
+  }
+
+  /* SLIDE OUT MENU
+  ************************************************************/
+  #clock-control-label,
+  #quick-select-label {
+    background: #000000;
+    color: #FFFFFF;
+    height: 40px;
+    position: fixed;
+    white-space: nowrap;
+    width: 50%;
+  }
+
+  #clock-control-label span,
+  #quick-select-label span {
+    line-height: 40px;
+    vertical-align: middle;
+  }
+
+  #quick-select-label {
+    left: 0;
+    padding-left: 3px;
+    text-align: left;
+    top: 0;
+  }
+
+  #clock-control-label {
+    padding-right: 3px;
+    right: 0;
+    text-align: right;
+    top: 0;
+  }
+
+  #clock-control,
+  #quick-select {
+    background: rgba(0, 0, 0, 0.7);
+    color: #FFFFFF;
+    height: 100%;
+    position: fixed;
+    top: 40px;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out;
+         -o-transition: all .3s ease-in-out;
+    width: 160px;
+    z-index: 2;
+  }
+
+  #clock-control {
+    right: -160px;
+  }
+
+  #quick-select {
+    left: -160px;
+  }
+
+  #clock-control div,
+  #quick-select div {
+    padding: 1px;
+  }
+
+  div#clock-control .help-lnk {
+    margin: 2px;
+    padding: 3px 7px;
+  }
+
+  .help-lnk a {
+    color: #FFFFFF;
+  }
+
+  #quick-select-toggle:checked ~ #quick-select {
+    position: fixed;
+    left: 0;
+  }
+
+  #clock-control-toggle:checked ~ #clock-control {
+    position: fixed;
+    right: 0;
+  }
+
+  #quick-select-toggle ~ .menu-header .times,
+  #quick-select-toggle:checked ~ .menu-header .equiv {
+    display: none;
+  }
+
+  #quick-select-toggle ~ .menu-header .equiv,
+  #quick-select-toggle:checked ~ .menu-header .times {
+    display: inline-block;
+  }
+
+
+  #clock-control-toggle ~ .menu-header .times,
+  #clock-control-toggle:checked ~ .menu-header .equiv {
+    display: none;
+  }
+
+  #clock-control-toggle ~ .menu-header .equiv,
+  #clock-control-toggle:checked ~ .menu-header .times {
+    display: inline-block;
+  }
+
+  /* HELP SCREEN AND OVERLAY
+  ************************************************************/
+  div#help-screen {
+    bottom: 5%;
+    left: 2%;
+    right: 2%;
+    top: 5%;
+  }
+
+  #help-text {
+    bottom: 5px;
+    left: 2px;
+    padding: 8px;
+    right: 2px;
+    top: 5px;
+    width: 90%;
+  }
+
+  #help-text div.help-content {
+    bottom: 5px;
+    left: 5px;
+    padding: 10px;
+    right: 5px;
+    top: 35px;
+  }
 }
 
-#footer .bottom {
-  bottom: 0;
-  display: inline-block;
-  position: absolute;
-  vertical-align: bottom;
-  width: 50%;
+@media screen and (max-height: 320px) {
+  .clock-btn {
+    height: 25px;
+  }
 }
-
-#footer .bottom.right { right: 0; text-align: right; }
-#footer .bottom.left { left: 0; text-align: left; }
-

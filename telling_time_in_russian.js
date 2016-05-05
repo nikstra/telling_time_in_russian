@@ -882,14 +882,16 @@
 
       document.getElementById( "lnk-help"
           ).addEventListener( 'click', function( e ) {
-            document.getElementById( 'help-screen' ).style.display = 'block';
-            e.preventDefault();
+            document.getElementById( 'help-overlay' ).style.display = 'block';
+            document.getElementById( 'help-text' ).style.display = 'block';
+            //e.preventDefault();
           }
         );
 
       document.getElementById( "lnk-close-help"
           ).addEventListener( 'click', function( e ) {
-            document.getElementById( 'help-screen' ).style.display = 'none';
+            document.getElementById( 'help-text' ).style.display = 'none';
+            document.getElementById( 'help-overlay' ).style.display = 'none';
             e.preventDefault();
           }
         );
