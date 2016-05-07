@@ -210,6 +210,7 @@ div#footer {
   left: 0;
   position: absolute;
   width: 100%;
+  z-index: -1; /* For some reason this is needed to keep the footer behind the menus. */
 }
 
 #footer .bottom {
