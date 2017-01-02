@@ -21,6 +21,19 @@
     <div id="page-header">
       <h1><span class="speak">Сколько&nbsp;времени?</span> / <span class="speak">Который&nbsp;час?</span></h1>
     </div>
+    
+    <div id="footer">
+      <div class="bottom left">
+      <a href="http://responsivevoice.org">ResponsiveVoice-NonCommercial</a> licensed under
+      <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+        <img title="ResponsiveVoice Text To Speech" src="http://responsivevoice.org/wp-content/uploads/2014/08/95x15.png" alt="95x15" width="95" height="15" />
+      </a>
+      </div><div class="bottom right">
+        <a href="#" id="lnk-dump-str" class="really-small" title="Generate and dump all 1440 time strings. Refresh page to return.">Dump all time strings</a>
+      </div>
+    </div> <!-- end footer -->
+
+    <!-- #page-content needs to come after #footer because #quick-select and #clock-control creates new stacking contexts. -->    
     <div id="page-content">
       <noscript>
         This web page requires JavaScript and a modern browser that supports
@@ -109,16 +122,6 @@
       <div id="time-text" title="Нажмите на строку текста для прослушивания."></div>
     </div> <!-- end page-content -->
     
-    <div id="footer">
-      <div class="bottom left">
-      <a href="http://responsivevoice.org">ResponsiveVoice-NonCommercial</a> licensed under
-      <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
-        <img title="ResponsiveVoice Text To Speech" src="http://responsivevoice.org/wp-content/uploads/2014/08/95x15.png" alt="95x15" width="95" height="15" />
-      </a>
-      </div><div class="bottom right">
-        <a href="#" id="lnk-dump-str" class="really-small" title="Generate and dump all 1440 time strings. Refresh page to return.">Dump all time strings</a>
-      </div>
-    </div> <!-- end footer -->
   </div> <!-- end page-wrapper -->
 
   <div id="help-text" lang="en">
