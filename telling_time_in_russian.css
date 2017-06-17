@@ -234,7 +234,8 @@ div#footer .bottom.right {
 ************************************************************/
 
 .speak {
-  cursor: default;
+  /* Has to be pointer for click events to be fired in Safari on iPhone */
+  cursor: pointer;
 }
 
 .speak:active {
