@@ -118,6 +118,11 @@ h1 {
 /* CLOCK BUTTONS
 ************************************************************/
 
+.material-icons {
+  /* MSIE uses cursor text when hovering over the icons */
+  cursor: default;
+}
+
 .btn-up-down {
   background-color: transparent;
   border: none;
