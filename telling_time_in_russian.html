@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Сколько времени? / Который час?</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="telling_time_in_russian.css">
 
   <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
@@ -46,14 +47,14 @@
 	        <label for="quick-select-toggle" id="quick-select-label" class="menu-header right"><span class="speak">Быстрый выбор</span> <span class="times">&times;</span><span class="equiv">&equiv;</span></label>
 	        <p>
           <div id="quick-select">
-            <div><span class="speak">Полночь</span><!--             -->&nbsp;<button type="button" class="clock-btn" id="btn-midnight">&#x25C6;</button></div>
-            <div><span class="speak">Шесть утра</span><!--          -->&nbsp;<button type="button" class="clock-btn" id="btn-morning">&#x25C6;</button></div>
-            <div><span class="speak">Полдень</span><!--             -->&nbsp;<button type="button" class="clock-btn" id="btn-noon">&#x25C6;</button></div>
-            <div><span class="speak">Шесть вечера</span><!--        -->&nbsp;<button type="button" class="clock-btn" id="btn-evening">&#x25C6;</button></div>
-            <div><span class="speak">Ровно&nbsp;-</span><!--        -->&nbsp;<button type="button" class="clock-btn" id="btn-sharp">&#x25C6;</button></div>
-            <div><span class="speak">Четверть&nbsp;-</span><!--     -->&nbsp;<button type="button" class="clock-btn" id="btn-q-past">&#x25C6;</button></div>
-            <div><span class="speak">Половина&nbsp;-</span><!--     -->&nbsp;<button type="button" class="clock-btn" id="btn-h-past">&#x25C6;</button></div>
-            <div><span class="speak">Без четверти&nbsp;-</span><!-- -->&nbsp;<button type="button" class="clock-btn" id="btn-q-to">&#x25C6;</button></div>
+            <div><span class="speak">Полночь</span><!--             -->&nbsp;<button type="button" class="clock-btn" id="btn-midnight"><i class="material-icons">star_border</i></button></div>
+            <div><span class="speak">Шесть утра</span><!--          -->&nbsp;<button type="button" class="clock-btn" id="btn-morning"><i class="material-icons">star_border</i></button></div>
+            <div><span class="speak">Полдень</span><!--             -->&nbsp;<button type="button" class="clock-btn" id="btn-noon"><i class="material-icons">star_border</i></button></div>
+            <div><span class="speak">Шесть вечера</span><!--        -->&nbsp;<button type="button" class="clock-btn" id="btn-evening"><i class="material-icons">star_border</i></button></div>
+            <div><span class="speak">Ровно&nbsp;-</span><!--        -->&nbsp;<button type="button" class="clock-btn" id="btn-sharp"><i class="material-icons">star_border</i></button></div>
+            <div><span class="speak">Четверть&nbsp;-</span><!--     -->&nbsp;<button type="button" class="clock-btn" id="btn-q-past"><i class="material-icons">star_border</i></button></div>
+            <div><span class="speak">Половина&nbsp;-</span><!--     -->&nbsp;<button type="button" class="clock-btn" id="btn-h-past"><i class="material-icons">star_border</i></button></div>
+            <div><span class="speak">Без четверти&nbsp;-</span><!-- -->&nbsp;<button type="button" class="clock-btn" id="btn-q-to"><i class="material-icons">star_border</i></button></div>
           </div> <!-- end quick-select -->
         </div><div id="center">
           <canvas id="canvas" width="300" height="300">Your browser does not support HTML5 canvas.</canvas>
@@ -109,11 +110,11 @@
 	        <label for="clock-control-toggle" id="clock-control-label" class="menu-header left"><span class="times">&times;</span><span class="equiv">&equiv;</span> <span class="speak">Управления</span></label>
           <p>
           <div id="clock-control">
-            <div><button type="button" class="clock-btn" id="btn-tick">&#x25B6;&#x25AE;</button><!--  -->&nbsp;<span class="speak">Шаг вперед</span></div> <!-- &#x25B8 step forward -->
-            <div><button type="button" class="clock-btn" id="btn-btick">&#x25AE;&#x25C0;</button><!-- -->&nbsp;<span class="speak">Шаг назад</span></div> <!-- &#x25C2 step backwards -->
-            <div><button type="button" class="clock-btn" id="btn-now">&#x25CF;</button><!--           -->&nbsp;<span class="speak">Текущее время</span></div> <!-- current time -->
-            <div><button type="button" class="clock-btn" id="btn-start">&#x25B6;</button><!--         -->&nbsp;<span class="speak">Пуск</span></div> <!-- start -->
-            <div><button type="button" class="clock-btn" id="btn-stop">&#x25A0;</button><!--          -->&nbsp;<span class="speak">Стоп</span></div> <!-- stop -->
+            <div><button type="button" class="clock-btn" id="btn-tick"><i class="material-icons">skip_next</i></button><!--  -->&nbsp;<span class="speak">Шаг вперед</span></div> <!-- &#x25B8 step forward -->
+            <div><button type="button" class="clock-btn" id="btn-btick"><i class="material-icons">skip_previous</i></button><!-- -->&nbsp;<span class="speak">Шаг назад</span></div> <!-- &#x25C2 step backwards -->
+            <div><button type="button" class="clock-btn" id="btn-now"><i class="material-icons">fiber_manual_record</i></button><!--           -->&nbsp;<span class="speak">Текущее время</span></div> <!-- current time -->
+            <div><button type="button" class="clock-btn" id="btn-start"><i class="material-icons">play_arrow</i></button><!--         -->&nbsp;<span class="speak">Пуск</span></div> <!-- start -->
+            <div><button type="button" class="clock-btn" id="btn-stop"><i class="material-icons">stop</i></button><!--          -->&nbsp;<span class="speak">Стоп</span></div> <!-- stop -->
             <div><div class="help-lnk"><label for="clock-control-toggle"><a title="Помощь" id="lnk-help" name="#">?</a></label></div></div> <!-- help -->
           </div> <!-- end clock-control -->
         </div> <!-- end right-panel -->

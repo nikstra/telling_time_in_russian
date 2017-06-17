@@ -794,7 +794,9 @@
 
     if( e.target === e.currentTarget ) return;
 
-    switch( e.target.id ) {
+    var target = e.target.type === 'button' ? e.target : e.target.parentNode;
+
+    switch( target.id ) {
     case "btn-midnight":
       canvasClock.set( 0, 0 );
       break;
@@ -828,7 +830,9 @@
 
     if( e.target === e.currentTarget ) return;
 
-    switch( e.target.id ) {
+    var target = e.target.type === 'button' ? e.target : e.target.parentNode;
+
+    switch( target.id ) {
     case "btn-tick":
       canvasClock.step( true );
       break;
