@@ -155,8 +155,7 @@ h1 {
   height: 30px;
   margin: 2px;
   text-align: center;
-      vertical-align: middle;
-
+  vertical-align: middle;
   width: 30px;
 }
 
@@ -334,6 +333,7 @@ div#help-overlay {
 
 .help-content td {
   padding: 3px;
+  vertical-align: middle;
 }
 
 #help-text table,
@@ -349,7 +349,7 @@ div#help-overlay {
 }
 
 #help-text .small {
-  font-size: 8px;
+  font-size: 12px;
 }
 
 
