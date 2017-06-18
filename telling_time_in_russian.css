@@ -121,6 +121,7 @@ h1 {
 .material-icons {
   /* MSIE uses cursor text when hovering over the icons */
   cursor: default;
+  font-size: 18px;
 }
 
 .btn-up-down {
