@@ -59,6 +59,7 @@ div#right-panel {
 
 div#left-panel,
 div#right-panel {
+  font-size: 14px;
   width: 160px;
 }
 
@@ -454,7 +455,6 @@ div#help-overlay {
   #quick-select {
     background: rgba(0, 0, 0, 0.7);
     color: #FFFFFF;
-    font-size: 14px;
     height: 100%;
     position: fixed;
     top: 40px;
