@@ -454,6 +454,7 @@ div#help-overlay {
   #quick-select {
     background: rgba(0, 0, 0, 0.7);
     color: #FFFFFF;
+    font-size: 14px;
     height: 100%;
     position: fixed;
     top: 40px;
