@@ -14,6 +14,7 @@ body {
 body {
   background: #FFFFFF;
   font-family: "Geneva CY", "Helvetica CY", "Arial", sans-serif;
+  overflow-y: scroll;
 }
 
 div#page-content {
