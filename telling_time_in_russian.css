@@ -82,6 +82,11 @@ div#time-text {
   text-align: center;
 }
 
+#clock-control,
+#quick-select {
+  padding-top: 3px;
+}
+
 /* HEADINGS */
 h1 {
   font-size: 2em;
