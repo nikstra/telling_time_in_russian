@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- http://www.w3schools.com/canvas/canvas_clock.asp -->
+<html lang="ru">
+<head>
+
+	<!-- Make MSIE use HTML5 rendering engine instead of Compatibility Mode when loding the file locally. -->
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta charset=utf-8 />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Сколько времени? / Который час?</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="telling_time_in_russian.css">
+
+  <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+  <script src="telling_time_in_russian.js"></script>
+
+</head>
+<body>
+  <div id="page-wrapper">
+    <div id="menubar"></div>
+    <div id="page-header">
+      <h1><span class="speak">Сколько&nbsp;времени?</span> / <span class="speak">Который&nbsp;час?</span></h1>
+    </div>
+    
+    <div id="footer">
+      <div class="bottom left">
+      <a href="http://responsivevoice.org">ResponsiveVoice-NonCommercial</a> licensed under
+      <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
+        <img title="ResponsiveVoice Text To Speech" src="http://responsivevoice.org/wp-content/uploads/2014/08/95x15.png" alt="95x15" width="95" height="15" />
+      </a>
+      </div><div class="bottom right">
+        <a href="#" id="lnk-dump-str" class="really-small" title="Generate and dump all 1440 time strings. Refresh page to return.">Dump all time strings</a>
+      </div>
+    </div> <!-- end footer -->
+
+    <!-- #page-content needs to come after #footer because #quick-select and #clock-control creates new stacking contexts. -->    
+    <div id="page-content">
+      <noscript>
+        This web page requires JavaScript and a modern browser that supports
+        HTML5 canvas. Please enable JavaScript or upgrade your browser in
+        order to view this page.
+      </noscript>
+      <div id="clock-container">
+        <div id="left-panel">
+          <input type="checkbox" id="quick-select-toggle">
+	        <label for="quick-select-toggle" id="quick-select-label" class="menu-header right"><span class="speak">Быстрый выбор</span> <span class="times">&times;</span><span class="equiv">&equiv;</span></label>
+	        <p>
+          <div id="quick-select">
+            <div><span class="speak">Полночь</span><!--             -->&nbsp;<button type="button" class="clock-btn" id="btn-midnight">00</button></div>
+            <div><span class="speak">Шесть утра</span><!--          -->&nbsp;<button type="button" class="clock-btn" id="btn-morning">06</button></div>
+            <div><span class="speak">Полдень</span><!--             -->&nbsp;<button type="button" class="clock-btn" id="btn-noon">12</button></div>
+            <div><span class="speak">Шесть вечера</span><!--        -->&nbsp;<button type="button" class="clock-btn" id="btn-evening">18</button></div>
+            <div><span class="speak">Ровно&nbsp;-</span><!--        -->&nbsp;<button type="button" class="clock-btn" id="btn-sharp">1</button></div>
+            <div><span class="speak">Четверть&nbsp;-</span><!--     -->&nbsp;<button type="button" class="clock-btn" id="btn-q-past">&frac14;</button></div>
+            <div><span class="speak">Половина&nbsp;-</span><!--     -->&nbsp;<button type="button" class="clock-btn" id="btn-h-past">&frac12;</button></div>
+            <div><span class="speak">Без четверти&nbsp;-</span><!-- -->&nbsp;<button type="button" class="clock-btn" id="btn-q-to">&frac34;</button></div>
+          </div> <!-- end quick-select -->
+        </div><div id="center">
+          <canvas id="canvas" width="300" height="300">Your browser does not support HTML5 canvas.</canvas>
+          <div id="time-select" class="unselectable">
+            <div id="up-down-container">
+              <span class="up-down-group" title="Установите часы"> <!-- Отрегулируйте часов -->
+                <button type="button" class="btn-up-down" id="btn-hour-down">&#x25BC;</button>
+                <span class="speak">часы</span>
+                <button type="button" class="btn-up-down" id="btn-hour-up">&#x25B2;</button>
+              </span>
+              <span class="up-down-group" title="Установите минуты"> <!-- Отрегулируйте минуты -->
+                <button type="button" class="btn-up-down" id="btn-min-down">&#x25BC;</button>
+                <span class="speak">минуты</span>
+                <button type="button" class="btn-up-down" id="btn-min-up">&#x25B2;</button>
+              </span>
+            </div> <!-- end up-down-container -->
+            <div id="sel-button-container">
+              <span class="sel-button-group">
+                <label for="sel-hour"><span class="speak">час:</span></label>
+                <select id="sel-hour" name="sel-hour">
+                  <option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option>
+                  <option value="4">04</option><option value="5">05</option><option value="6">06</option><option value="7">07</option>
+                  <option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option>
+                  <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+                  <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option>
+                  <option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option>
+                </select>
+              </span>
+              <span class="sel-button-group">
+                <label for="sel-minute"><span class="speak">минута:</span></label>
+                <select id="sel-minute" name="sel-minute">
+                  <option value="0">00</option><option value="1">01</option><option value="2">02</option><option value="3">03</option>
+                  <option value="4">04</option><option value="5">05</option><option value="6">06</option><option value="7">07</option>
+                  <option value="8">08</option><option value="9">09</option><option value="10">10</option><option value="11">11</option>
+                  <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+                  <option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option>
+                  <option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option>
+                  <option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option>
+                  <option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+                  <option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option>
+                  <option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option>
+                  <option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option>
+                  <option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option>
+                  <option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option>
+                  <option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option>
+                  <option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option>
+                </select>
+              </span>
+            </div> <!-- end sel-button-container -->
+          </div> <!-- end time-select -->
+        </div><div id="right-panel">
+          <input type="checkbox" id="clock-control-toggle">
+	        <label for="clock-control-toggle" id="clock-control-label" class="menu-header left"><span class="times">&times;</span><span class="equiv">&equiv;</span> <span class="speak">Управления</span></label>
+          <p>
+          <div id="clock-control">
+            <div><button type="button" class="clock-btn" id="btn-tick"><i class="material-icons">skip_next</i></button><!--          -->&nbsp;<span class="speak">Шаг вперед</span></div> <!-- step forward -->
+            <div><button type="button" class="clock-btn" id="btn-btick"><i class="material-icons">skip_previous</i></button><!--     -->&nbsp;<span class="speak">Шаг назад</span></div> <!-- step backwards -->
+            <div><button type="button" class="clock-btn" id="btn-now"><i class="material-icons">fiber_manual_record</i></button><!-- -->&nbsp;<span class="speak">Текущее время</span></div> <!-- current time -->
+            <div><button type="button" class="clock-btn" id="btn-start"><i class="material-icons">play_arrow</i></button><!--        -->&nbsp;<span class="speak">Пуск</span></div> <!-- start -->
+            <div><button type="button" class="clock-btn" id="btn-stop"><i class="material-icons">stop</i></button><!--               -->&nbsp;<span class="speak">Стоп</span></div> <!-- stop -->
+            <div><div class="help-lnk"><label for="clock-control-toggle"><a title="Помощь" id="lnk-help" name="#">?</a></label></div></div> <!-- help -->
+          </div> <!-- end clock-control -->
+        </div> <!-- end right-panel -->
+      </div> <!-- end clock-container -->
+
+      <div id="time-text" title="Нажмите на строку текста для прослушивания."></div>
+    </div> <!-- end page-content -->
+    
+  </div> <!-- end page-wrapper -->
+
+  <div id="help-text" lang="en">
+    <a href="#" id="lnk-close-help" class="close-help-lnk">&times;</a>
+    <div class="help-content">
+      <h2>Help</h2>
+      <h3>How to Use</h3>
+      <p>Use the buttons to set the clock. The Russian time expressions
+      are shown below the clock and each time has several alternative
+      expressions.
+      Words shown in parentheses are optional and can be left out. As an
+      example, there is no point in telling someone whom asks what time
+      it is, that it is seven o'clock in the <em>evening</em> if it is
+      obvious what time of day it is. Another example:</p>
+      <p>«семь (часов) (вечера)» can be said as;<br>
+      «семь»<br>
+      «семь часов»<br>
+      «семь вечера»<br>
+      «семь часов вечера»
+      </p>
+      <p>If you click on any Russian text, it will be
+      read out loud by a synthesised voice.</p>
+      <p><em>Note:</em> Changing the time of the clock on this page will not
+      affect your device's clock or time settings.</p>
+      <h3>Buttons Alongside the Clock</h3>
+      <span>or in the menus on small screens</span>
+      <table>
+        <tr>
+          <td>Полночь</td><td>Sets the clock to midnight.</td>
+        </tr><tr>
+          <td>Шесть утра</td><td>Sets the clock to 06:00 (6 AM).</td>
+        </tr><tr>
+          <td>Полдень</td><td>Sets the clock to noon.</td>
+        </tr><tr>
+          <td>Шесть вечера</td><td>Sets the clock to 18:00 (6 PM).</td>
+        </tr><tr>
+          <td>Ровно -</td><td>O'clock sharp. Sets the minute hand to 12. Hour hand remains unchanged.</td>
+        </tr><tr>
+          <td>Четверть -</td><td>Quarter past. Sets the minute hand to 3. Hour hand remains unchanged.</td>
+        </tr><tr>
+          <td>Половина -</td><td>Half past. Sets the minute hand to 6. Hour hand remains unchanged.</td>
+        </tr><tr>
+          <td>Без четверти -</td><td>Quarter to. Sets the minute hand to 9. Hour hand remains unchanged.</td>
+        </tr><tr>
+          <td><i class="material-icons small">skip_next</i> Шаг вперед</td><td>Steps the clock a minute at a time.</td>
+        </tr><tr>
+          <td><i class="material-icons small">skip_previous</i> Шаг назад</td><td>Steps the clock backwards a minute at a time.</td>
+        </tr><tr>
+          <td><i class="material-icons small">fiber_manual_record</i> Текущее время</td><td>Set the clock to current time.</td>
+        </tr><tr>
+          <td><i class="material-icons small">play_arrow</i> Пуск</td><td>Starts the clock.</td>
+        </tr><tr>
+          <td><i class="material-icons small">stop</i> Стоп</td><td>Stops the clock.</td>
+        </tr>
+      </table>
+      <h3>Controls Below the Clock</h3>
+      <table>
+        <tr>
+        <td>&#x25BC; часы &#x25B2;</td><td>Steps the hour hand forwards or backwards an hour at a time. Minute hand is not affected.</td>
+        </tr><tr>
+        <td>&#x25BC; минуты &#x25B2;</td><td>Steps the minute hand forwards or backwards a minute at a time. Hour hand is not affected.</td>
+        </tr><tr>
+        <td>час:</td><td>Select hour to set. Minutes are not affected.</td>
+        </tr><tr>
+        <td>минута:</td><td>Select minute to set. Hours are not affected.</td>
+        </tr>
+      </table>
+      <p>
+      Additionally, there is a link in the lower right hand corner &quot;Dump all time strings&quot;. Clicking this prints all time expressions
+      for every minute of the day in a semicolon delimited list that can be copied to a spreadsheet (or similar) for troubleshooting or verifying
+      the correctness of this page. Refresh the web page to return to the clock.
+      <h3>About</h3>
+      <p>
+      I have written this page, while I'm learning Russian, to teach myself telling time.
+      <p>
+      The clock itself uses code from w3schools.com and voice synthetisation is provided by Responsive Voice.
+      <p>
+      &copy; 2015-2017 Niklas Strand
+      <p></p>
+    </div>
+  </div> <!-- end help-text -->
+  <div id="help-overlay"></div>
+</body>
+</html>

@@ -1,0 +1,558 @@
+/* BASIC PAGE LAYOUT
+************************************************************/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #FFFFFF;
+  font-family: "Geneva CY", "Helvetica CY", "Arial", sans-serif;
+  overflow-y: scroll;
+}
+
+div#page-content {
+	padding-bottom: 100px; /* Match height of the #footer element */
+}
+
+canvas#canvas {
+  background-color: #A5D2D8;
+  border-radius: 50%;
+  box-shadow: 1px 2px 0px 0px #777777;
+  height: 300px;
+  width: 300px;
+}
+
+div#page-wrapper {
+	min-height: 100%;
+  min-width: 320px;
+	position: relative;
+}
+
+div#menubar {
+  display: none;
+}
+
+div#page-header {
+  background: #9AD5A7;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+div#clock-container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2em;
+  text-align: center;
+}
+
+div#center,
+div#left-panel,
+div#right-panel {
+  display: inline-block;
+  vertical-align: top;
+}
+
+div#left-panel,
+div#right-panel {
+  font-size: 14px;
+  width: 160px;
+}
+
+div#center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 320px;
+}
+
+div#left-panel {
+  text-align: right;
+}
+
+div#right-panel {
+  text-align: left;
+}
+
+div#time-text {
+  text-align: center;
+}
+
+#clock-control,
+#quick-select {
+  padding-top: 3px;
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  padding: 20px;
+}
+
+#left-panel .menu-header,
+#right-panel .menu-header {
+  display: inline;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
+#sel-button-container,
+#up-down-container {
+  margin: 10px;
+}
+
+#sel-button-container .sel-button-group,
+#up-down-container .up-down-group {
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 5px;
+  width: 120px;
+}
+
+/* OUTPUT DIV */
+#time-text {
+  font-size: 1.2em;
+  padding: 20px;
+}
+
+/* CLOCK BUTTONS
+************************************************************/
+
+.material-icons {
+  /* MSIE uses cursor text when hovering over the icons */
+  cursor: default;
+  font-size: 18px;
+}
+
+.btn-up-down {
+  background-color: transparent;
+  border: none;
+  color: darkblue;
+  padding: 0;
+  text-decoration: none;
+}
+
+.btn-up-down:hover {
+  color: grey;
+}
+
+.btn-up-down:active {
+  color: red;
+}
+
+.btn-up-down:disabled {
+  color: grey;
+  cursor: auto;
+}
+
+#sel-minute:disabled,
+#sel-hour:disabled {
+  color: black;
+}
+
+.clock-btn {
+  background: #A5D2D8;
+  border: 0 none;
+  box-shadow: 1px 2px 0px 0px #777777;
+  color: #000000;
+  height: 30px;
+  margin: 1px;
+  text-align: center;
+  vertical-align: middle;
+  width: 30px;
+}
+
+.clock-btn:active:enabled {
+  box-shadow: 0px 1px 0px 0px #777777;
+  position: relative;
+  top: 1px;
+}
+
+.clock-btn:disabled {
+  color: grey;
+  cursor: auto;
+}
+
+.help-lnk {
+  display: inline-block;
+  margin: 2px;
+  padding: 3px 7px;
+}
+
+.help-lnk a {
+  color: darkblue;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* SLIDE OUT MENU
+************************************************************/
+
+/* Hide the checkbox */
+#clock-control-toggle,
+#quick-select-toggle {
+  display: none;
+}
+
+/* Hide menu/close symbols */
+.equiv,
+.times {
+  cursor: default;
+  display: none;
+  font-family: monospace;
+  font-size: 40px; /*1.5em;*/
+  line-height: 40px;
+}
+
+/* FOOTER
+************************************************************/
+
+div#footer {
+  bottom: 0;
+  height: 100px; /* Match with padding-bottom of #page-content. */
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+#footer .bottom {
+  bottom: 0;
+  display: inline-block;
+  position: absolute;
+  vertical-align: bottom;
+  width: 50%;
+}
+
+div#footer .bottom.left {
+  left: 0;
+  text-align: left;
+}
+
+div#footer .bottom.right {
+  right: 0;
+  text-align: right;
+}
+
+/* GENERAL RULES
+************************************************************/
+
+.speak {
+  /* Has to be pointer for click events to be fired in Safari on iPhone */
+  cursor: pointer;
+}
+
+.speak:active {
+  background: #CCCCCC;
+}
+
+.really-small {
+  font-size: 0.5em;
+}
+
+.unselectable {
+  cursor: default;
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+   -khtml-user-select: none; /* webkit (konqueror) browsers */
+     -moz-user-select: none; /* mozilla browsers */
+      -ms-user-select: none; /* IE10+ */
+       /* user-select: none; */ /* breaks CSS level 3 validation */
+}
+
+/* HELP SCREEN AND OVERLAY
+************************************************************/
+
+/* bottom, top and height are set larger than the display size
+ * so that page contents doesn't show through if browser has
+ * auto-hiding address bar (ie. Chrome on Android).
+ */
+div#help-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  bottom: -100px;
+  height: 150%;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: -100px;
+  width: 100%;
+  z-index: 5;
+}
+
+.close-help-lnk {
+  background: rgb( 245, 245, 245 );
+  color: black;
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+  height: 30px;
+  position: absolute;
+  right: 2px;
+  text-align: center;
+  text-decoration: none;
+  top: 3px;
+  width: 35px;
+}
+
+#help-text {
+  background: #FFFFFF;
+  border: 5px solid #CCC;
+  border-radius: 10px;
+  display: none;
+  bottom: 10%;
+  left: 10%;
+  max-width: 800px;
+  margin: 5px auto;
+  padding: 8px;
+  position: fixed;
+  right: 10%;
+  text-align: left;
+  top: 10%;
+  z-index: 10;
+}
+
+#help-text div.help-content {
+  bottom: 10px;
+  left: 10px;
+  padding: 10px;
+  overflow: auto;
+  position: absolute;
+  right: 10px;
+  top: 35px;
+}
+
+.help-content h2,
+.help-content h3 {
+  margin: 5px;
+  margin-top: 10px;
+}
+
+.help-content p,
+.help-content span,
+.help-content table,
+.help-content td {
+  margin: 5px;
+}
+
+.help-content td {
+  padding: 3px;
+  vertical-align: middle;
+}
+
+#help-text table,
+#help-text tr,
+#help-text td {
+  border: 1px solid #CCC;
+}
+
+#help-text td:first-child {
+  font-size: 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+#help-text .small {
+  font-size: 12px;
+}
+
+
+/* RULES FOR SMALL SCREENS
+************************************************************/
+
+/* Set max-width a bit wider than 640px so that the layout
+ * does not break if there is a scrollbar visible.
+ */
+@media screen and (max-width: 660px) {
+
+  h1 {
+    font-size: 1.2em;
+  }
+
+  canvas#canvas {
+    height: 150px;
+    width: 150px;
+  }
+
+  div#menubar {
+    background: #000000;
+    display: block;
+    height: 30px;
+  }
+
+  div#left-panel,
+  div#right-panel {
+    position: fixed;
+    top: 0;
+  }
+
+  div#left-panel {
+    left: 0;
+  }
+
+  div#right-panel {
+    right: 0;
+  }
+
+  div#help-contents {
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+    top: 5%;
+  }
+
+  #up-down-container .up-down-group {
+    padding: 5px;
+    vertical-align: middle;
+  }
+
+  .btn-up-down {
+    font-size: 25px;
+    height: 30px;
+  }
+
+  #sel-hour,
+  #sel-minute {
+    height: 30px;
+  }
+
+  /* SLIDE OUT MENU
+  ************************************************************/
+  #clock-control-label,
+  #quick-select-label {
+    background: #000000;
+    color: #FFFFFF;
+    height: 40px;
+    position: fixed;
+    white-space: nowrap;
+    width: 50%;
+  }
+
+  #clock-control-label span,
+  #quick-select-label span {
+    line-height: 40px;
+    vertical-align: middle;
+  }
+
+  #quick-select-label {
+    left: 0;
+    padding-left: 3px;
+    text-align: left;
+    top: 0;
+  }
+
+  #clock-control-label {
+    padding-right: 3px;
+    right: 0;
+    text-align: right;
+    top: 0;
+  }
+
+  #clock-control,
+  #quick-select {
+    background: rgba(0, 0, 0, 0.7);
+    color: #FFFFFF;
+    height: 100%;
+    position: fixed;
+    top: 40px;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+       -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out;
+         -o-transition: all .3s ease-in-out;
+    width: 160px;
+    z-index: 2;
+  }
+
+  #clock-control {
+    right: -160px;
+  }
+
+  #quick-select {
+    left: -160px;
+  }
+
+  #clock-control div,
+  #quick-select div {
+    padding: 1px;
+  }
+
+  div#clock-control .help-lnk {
+    margin: 2px;
+    padding: 3px 7px;
+  }
+
+  .help-lnk a {
+    color: #FFFFFF;
+  }
+
+  #quick-select-toggle:checked ~ #quick-select {
+    position: fixed;
+    left: 0;
+  }
+
+  #clock-control-toggle:checked ~ #clock-control {
+    position: fixed;
+    right: 0;
+  }
+
+  #quick-select-toggle ~ .menu-header .times,
+  #quick-select-toggle:checked ~ .menu-header .equiv {
+    display: none;
+  }
+
+  #quick-select-toggle ~ .menu-header .equiv,
+  #quick-select-toggle:checked ~ .menu-header .times {
+    display: inline-block;
+  }
+
+
+  #clock-control-toggle ~ .menu-header .times,
+  #clock-control-toggle:checked ~ .menu-header .equiv {
+    display: none;
+  }
+
+  #clock-control-toggle ~ .menu-header .equiv,
+  #clock-control-toggle:checked ~ .menu-header .times {
+    display: inline-block;
+  }
+
+  /* HELP SCREEN AND OVERLAY
+  ************************************************************/
+  div#help-screen {
+    bottom: 5%;
+    left: 2%;
+    right: 2%;
+    top: 5%;
+  }
+
+  #help-text {
+    bottom: 5px;
+    left: 2px;
+    padding: 8px;
+    right: 2px;
+    top: 5px;
+    width: 90%;
+  }
+
+  #help-text div.help-content {
+    bottom: 5px;
+    left: 5px;
+    padding: 10px;
+    right: 5px;
+    top: 35px;
+  }
+}
+
+@media screen and (max-height: 320px) {
+  .clock-btn {
+    height: 25px;
+  }
+}
